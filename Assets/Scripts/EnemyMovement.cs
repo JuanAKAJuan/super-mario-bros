@@ -4,42 +4,43 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private float originalX;
-    private float maxOffset = 5.0f;
-    private float enemyPatrolTime = 2.0f;
-    private int moveRight = -1;
-    private Vector2 velocity;
-
-    private Rigidbody2D enemyBody;
+    public Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f);
     
-    void Start()
+    private float _originalX;
+    private const float MaxOffset = 5.0f;
+    private const float EnemyPatrolTime = 2.0f;
+    private int _moveRight = -1;
+    private Vector2 _velocity;
+    private Rigidbody2D _enemyBody;
+    
+    private void Start()
     {
-        enemyBody = GetComponent<Rigidbody2D>();
-        originalX = transform.position.x;
+        _enemyBody = GetComponent<Rigidbody2D>();
+        _originalX = transform.position.x;
         ComputeVelocity();
     }
 
-    void Update()
+    private void Update()
     {
-        if (Mathf.Abs(enemyBody.position.x - originalX) < maxOffset)
+        if (Mathf.Abs(_enemyBody.position.x - _originalX) < MaxOffset)
         {
             MoveGoomba();
         }
         else
         {
-            moveRight *= -1;
+            _moveRight *= -1;
             ComputeVelocity();
             MoveGoomba();
         }
     }
 
-    void ComputeVelocity()
+    private void ComputeVelocity()
     {
-        velocity = new Vector2((moveRight) * maxOffset / enemyPatrolTime, 0);
+        _velocity = new Vector2((_moveRight) * MaxOffset / EnemyPatrolTime, 0);
     }
 
-    void MoveGoomba()
+    private void MoveGoomba()
     {
-        enemyBody.MovePosition(enemyBody.position + velocity * Time.fixedDeltaTime);
+        _enemyBody.MovePosition(_enemyBody.position + _velocity * Time.fixedDeltaTime);
     }
 }
