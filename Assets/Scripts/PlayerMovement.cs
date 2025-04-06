@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed = 300;
     public float maxSpeed = 350;
-    public float upSpeed = 20;
+    public float upSpeed = 30;
     public TextMeshProUGUI scoreText;
     public GameObject enemies;
     public JumpOverGoomba jumpOverGoomba;
@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         _marioSprite = GetComponent<SpriteRenderer>();
 
         Application.targetFrameRate = 30;
+
         _marioBody = GetComponent<Rigidbody2D>();
 
         marioAnimator.SetBool("onGround", _onGroundState);
@@ -87,9 +88,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    int collisonLayerMask = ((1 << 3) | (1 << 6) | (1 << 7));
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (((collisonLayerMask & (1 << collision.transform.gameObject.layer)) > 0) & !_onGroundState)
         {
             _onGroundState = true;
             marioAnimator.SetBool("onGround", _onGroundState);
