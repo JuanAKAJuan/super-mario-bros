@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UIElements;
-using NUnit.Framework.Internal;
 
 public class PlayerMovement : MonoBehaviour
 {
