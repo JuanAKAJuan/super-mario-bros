@@ -1854,34 +1854,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Question Box Bounce (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1448602567129740778, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: m_Frequency
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448602567129740778, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: m_EnableCollision
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448602567129740778, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -23.780003
-      objectReference: {fileID: 0}
-    - target: {fileID: 1448602567129740778, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 4.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4465997031430589573, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: _gameManager
-      value: 
-      objectReference: {fileID: 112479489}
-    - target: {fileID: 4465997031430589573, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: bumpResetDelay
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8479269519866977014, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
-      propertyPath: m_BodyType
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9170349844966361374, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.84
@@ -2398,6 +2370,14 @@ PrefabInstance:
     - target: {fileID: 401124354380349010, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
       propertyPath: m_Name
       value: Question Box Bounce (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448602567129740778, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -23.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448602567129740778, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 4.1899996
       objectReference: {fileID: 0}
     - target: {fileID: 4465997031430589573, guid: f05b1269f780be7a6a02a9befa24db87, type: 3}
       propertyPath: _gameManager
