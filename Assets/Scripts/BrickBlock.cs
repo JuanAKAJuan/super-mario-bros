@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BrickBlockController : MonoBehaviour
+public class BrickBlock : MonoBehaviour
 {
     public AudioSource brickHitAudio;
 

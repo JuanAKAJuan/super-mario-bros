@@ -1,16 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 300;
     public float maxSpeed = 350;
     public float upSpeed = 30;
-    public TextMeshProUGUI scoreText;
-    public GameObject enemies;
-    public JumpOverGoomba jumpOverGoomba;
     public Animator marioAnimator;
     public AudioSource marioAudio;
     public AudioClip marioDeath;
@@ -24,6 +20,29 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer _marioSprite;
     private bool _faceRightState = true;
     private bool _onGroundState = true;
+    private GameManager _gameManager;
+
+    public void GameRestart()
+    {
+        // Reset position
+        _marioBody.transform.position = new Vector3(-0.023f, -1.07f, 0f);
+
+        // Reset sprite direction
+        _faceRightState = true;
+        _marioSprite.flipX = false;
+
+        // Reset animation
+        marioAnimator.SetTrigger("gameRestart");
+        alive = true;
+
+        // Reset camera position
+        gameCamera.position = new Vector3(0, 0, -10);
+    }
+
+    private void Awake()
+    {
+        _gameManager = GameObject.FindGameObjectWithTag("Manager")?.GetComponent<GameManager>();
+    }
 
     private void Start()
     {
@@ -105,34 +124,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void ResetGame()
-    {
-        // Reset position
-        _marioBody.transform.position = new Vector3(-0.023f, -1.07f, 0f);
-
-        // Reset sprite direction
-        _faceRightState = true;
-        _marioSprite.flipX = false;
-
-        // Reset score
-        scoreText.text = "Score: 0";
-
-        // Reset Goomba
-        foreach (Transform eachChild in enemies.transform)
-        {
-            eachChild.transform.localPosition = eachChild.GetComponent<EnemyMovement>().startPosition;
-        }
-
-        jumpOverGoomba.score = 0;
-
-        // Reset animation
-        marioAnimator.SetTrigger("gameRestart");
-        alive = true;
-
-        // Reset camera position
-        gameCamera.position = new Vector3(0, 0, -10);
-    }
-
     private IEnumerator DieAndResetSequence()
     {
         marioAnimator.Play("mario-die");
@@ -141,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
         yield return new WaitForSeconds(5.0f);
 
-        ResetGame();
+        _gameManager.GameRestart();
     }
 
     private void PlayJumpSound()

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      lakitus-cloud_0: 2784758123080400297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

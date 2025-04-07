@@ -3492,10 +3492,10 @@ TextureImporter:
       name: smb1_misc_sprites_79
       rect:
         serializedVersion: 2
-        x: 426
+        x: 427
         y: 1075
-        width: 11
-        height: 33
+        width: 10
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -3511,7 +3511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_80
+      name: coin_2
       rect:
         serializedVersion: 2
         x: 440
@@ -3533,7 +3533,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_81
+      name: coin_3
       rect:
         serializedVersion: 2
         x: 448
@@ -3555,7 +3555,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_82
+      name: coin_4
       rect:
         serializedVersion: 2
         x: 461
@@ -13784,6 +13784,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: coin_1
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 1093
+        width: 1
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7591b7a722962284ba4b06cb85aabd8
+      internalID: 1571818775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -13800,6 +13822,10 @@ TextureImporter:
     nameFileIdTable:
       big_hill: 9128541753878681872
       brick: -3531913397110614334
+      coin_1: 1571818775
+      coin_2: -7360645074605875957
+      coin_3: 974196589084800118
+      coin_4: -2771610037876743989
       empty_box: 2102946939851786183
       goomba_left_foot_forward: 1486970161379018345
       goomba_right_foot_forward: 5669089386611473557
@@ -14321,9 +14347,6 @@ TextureImporter:
       smb1_misc_sprites_74: -5527243368327282255
       smb1_misc_sprites_79: -2735487014922336499
       smb1_misc_sprites_8: -593753494136778561
-      smb1_misc_sprites_80: -7360645074605875957
-      smb1_misc_sprites_81: 974196589084800118
-      smb1_misc_sprites_82: -2771610037876743989
       smb1_misc_sprites_83: 945051112172071285
       smb1_misc_sprites_84: -8212910277675627911
       smb1_misc_sprites_85: -3125303052889277821

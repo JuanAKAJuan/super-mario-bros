@@ -1,33 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class JumpOverGoomba : MonoBehaviour
 {
     public Transform enemyLocation;
-    public TextMeshProUGUI scoreText;
     public Vector3 boxSize;
     public float maxDistance;
     public LayerMask layerMask;
-    
-    // Don't want the score to show up in the inspector.
-    [NonSerialized] public int score;
-    
+
     private bool _onGroundState;
     private bool _countScoreState;
-    
+    private GameManager _gameManager;
+
     private void Start()
     {
-        
+        _gameManager = GameObject.FindGameObjectWithTag("Manager")?.GetComponent<GameManager>();
     }
 
     private void Update()
     {
-        
+
     }
-    
+
     private void FixedUpdate()
     {
         if (Input.GetKeyDown("space") && OnGroundCheck())
@@ -42,9 +36,7 @@ public class JumpOverGoomba : MonoBehaviour
             if (Math.Abs(transform.position.x - enemyLocation.position.x) < 0.5f)
             {
                 _countScoreState = false;
-                score++;
-                scoreText.text = "Score: " + score.ToString();
-                Debug.Log(score);
+                _gameManager.IncreaseScore(1);
             }
         }
     }
