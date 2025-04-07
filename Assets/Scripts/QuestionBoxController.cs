@@ -4,8 +4,33 @@ public class QuestionBoxController : MonoBehaviour
 {
     public AudioSource questionBoxHitAudio;
 
+    private SpriteRenderer _spriteRenderer;
+
+    /// <summary>
+    /// Reference to the animator.
+    /// </summary>
+    private Animator _animator;
+
+    /// <summary>
+    /// Tracks if the box has already been hit.
+    /// </summary>
+    private bool _boxHasBeenHit = false;
+
+    private static readonly int HitTriggerHash = Animator.StringToHash("hit");
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (_boxHasBeenHit)
+        {
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Player"))
         {
             // Check if the player hit the BOTTOM of the question box
@@ -15,7 +40,7 @@ public class QuestionBoxController : MonoBehaviour
                 // A threshold (< -0.9f) is used to account for slight angle variations.
                 if (-contact.normal.y < -0.9)
                 {
-                    PlayQuestionBoxHitSound();
+                    TriggerHit();
                     break;
                 }
             }
@@ -25,5 +50,12 @@ public class QuestionBoxController : MonoBehaviour
     private void PlayQuestionBoxHitSound()
     {
         questionBoxHitAudio.PlayOneShot(questionBoxHitAudio.clip);
+    }
+
+    private void TriggerHit()
+    {
+        _boxHasBeenHit = true;
+        _animator.SetTrigger(HitTriggerHash);
+        PlayQuestionBoxHitSound();
     }
 }

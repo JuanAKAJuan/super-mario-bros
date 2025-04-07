@@ -2411,7 +2411,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_30
+      name: empty_box
       rect:
         serializedVersion: 2
         x: 373
@@ -3445,7 +3445,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_77
+      name: question_block_2
       rect:
         serializedVersion: 2
         x: 390
@@ -3467,7 +3467,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_78
+      name: question_block_3
       rect:
         serializedVersion: 2
         x: 408
@@ -13800,6 +13800,7 @@ TextureImporter:
     nameFileIdTable:
       big_hill: 9128541753878681872
       brick: -3531913397110614334
+      empty_box: 2102946939851786183
       goomba_left_foot_forward: 1486970161379018345
       goomba_right_foot_forward: 5669089386611473557
       goomba_squashed: -6716718805002206265
@@ -13810,6 +13811,8 @@ TextureImporter:
       pipe_body: 8113179838992992988
       pipe_head: 6825944802204487408
       question_block: -6119185643575142597
+      question_block_2: -5736475415078053691
+      question_block_3: 6245329863648893500
       small_hill: 612446306097060019
       smb1_misc_sprites_0: 943316591371326288
       smb1_misc_sprites_1: 1201216133586973737
@@ -14027,7 +14030,6 @@ TextureImporter:
       smb1_misc_sprites_298: -5920668922773169002
       smb1_misc_sprites_299: 2350567983402388684
       smb1_misc_sprites_3: -7660030227844165940
-      smb1_misc_sprites_30: 2102946939851786183
       smb1_misc_sprites_300: 853562817816952976
       smb1_misc_sprites_301: -7939829433618298087
       smb1_misc_sprites_302: -4034225529190301441
@@ -14317,8 +14319,6 @@ TextureImporter:
       smb1_misc_sprites_72: -6253692026196956459
       smb1_misc_sprites_73: -254972823797619944
       smb1_misc_sprites_74: -5527243368327282255
-      smb1_misc_sprites_77: -5736475415078053691
-      smb1_misc_sprites_78: 6245329863648893500
       smb1_misc_sprites_79: -2735487014922336499
       smb1_misc_sprites_8: -593753494136778561
       smb1_misc_sprites_80: -7360645074605875957

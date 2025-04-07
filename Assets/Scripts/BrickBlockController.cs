@@ -15,7 +15,7 @@ public class BrickBlockController : MonoBehaviour
                 // A threshold (< -0.9f) is used to account for slight angle variations.
                 if (-contact.normal.y < -0.9)
                 {
-                    PlayBrickHitSound();
+                    TriggerHit();
                     break;
                 }
             }
@@ -25,5 +25,10 @@ public class BrickBlockController : MonoBehaviour
     private void PlayBrickHitSound()
     {
         brickHitAudio.PlayOneShot(brickHitAudio.clip);
+    }
+
+    private void TriggerHit()
+    {
+        PlayBrickHitSound();
     }
 }

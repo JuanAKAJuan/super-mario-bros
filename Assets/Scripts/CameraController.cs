@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // <summary>
-    // Mario's Transform.
-    // </summary>
+    /// <summary>
+    /// Mario's Transform.
+    /// </summary>
     public Transform player;
 
-    // <summary>
-    // GameObject that indicates the end of the map.
-    // </summary>
+    /// <summary>
+    /// GameObject that indicates the end of the map.
+    /// </summary>
     public Transform endLimit;
 
-    // <summary>
-    // Initial x-offset between the camera and Mario.
-    // </summary>
+    /// <summary>
+    /// Initial x-offset between the camera and Mario.
+    /// </summary>
     private float offset;
 
-    // <summary>
-    // Smallest x-coordinate of the camera.
-    // </summary>
+    /// <summary>
+    /// Smallest x-coordinate of the camera.
+    /// </summary>
     private float startX;
 
-    // <summary>
-    // Largest x-coordinate of the camera.
-    // </summary>
+    /// <summary>
+    /// Largest x-coordinate of the camera.
+    /// </summary>
     private float endX;
 
     private float viewportHalfWidth;
