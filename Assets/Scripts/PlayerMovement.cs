@@ -25,8 +25,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void GameRestart()
     {
-        // Reset position
+        // Reset position and stop movement
         _marioBody.transform.position = new Vector3(-6.52f, -2.47f, 0f);
+        _marioBody.linearVelocity = Vector2.zero;
+        _marioBody.angularVelocity = 0f;
 
         // Reset sprite direction
         _faceRightState = true;
@@ -35,9 +37,6 @@ public class PlayerMovement : MonoBehaviour
         // Reset animation
         marioAnimator.SetTrigger("gameRestart");
         alive = true;
-
-        // Reset camera position
-        gameCamera.position = new Vector3(0, 0, -10);
     }
 
     public void PlaySoundEffect(AudioClip clip, float volume = 1.0f)
@@ -48,21 +47,19 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         _gameManager = GameObject.FindGameObjectWithTag("Manager")?.GetComponent<GameManager>();
+        _marioSprite = GetComponent<SpriteRenderer>();
+        _marioBody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        _marioSprite = GetComponent<SpriteRenderer>();
-
-        Application.targetFrameRate = 30;
-
-        _marioBody = GetComponent<Rigidbody2D>();
-
         marioAnimator.SetBool("onGround", _onGroundState);
     }
 
     private void Update()
     {
+        if (!alive) return;
+
         if (Input.GetKeyDown("a") && _faceRightState)
         {
             _faceRightState = false;
@@ -88,25 +85,33 @@ public class PlayerMovement : MonoBehaviour
     {
         if (alive)
         {
+            // --- Horizontal Movement ---
             float moveHorizontal = Input.GetAxisRaw("Horizontal");
 
             if (Mathf.Abs(moveHorizontal) > 0)
             {
                 Vector2 movement = new Vector2(moveHorizontal, 0);
 
-                if (_marioBody.linearVelocity.magnitude < maxSpeed)
-                    _marioBody.AddForce(movement * speed);
+                _marioBody.AddForce(movement * speed);
+                _marioBody.linearVelocity = new Vector2(Mathf.Clamp(_marioBody.linearVelocity.x, -maxSpeed, maxSpeed), _marioBody.linearVelocity.y);
+            }
+            else
+            {
+                // If no input, gradually slow down (simple friction)
+                _marioBody.linearVelocity = new Vector2(_marioBody.linearVelocity.x * 0.9f, _marioBody.linearVelocity.y);
             }
 
-            if (Input.GetKeyUp("a") || Input.GetKeyUp("d"))
-                _marioBody.linearVelocity = Vector2.zero;
-
+            // --- Jumping ---
             if (Input.GetKeyDown("space") && _onGroundState)
             {
                 _marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
                 _onGroundState = false;
                 marioAnimator.SetBool("onGround", _onGroundState);
             }
+        }
+        else
+        {
+            _marioBody.linearVelocity = Vector2.zero;
         }
     }
 
@@ -124,21 +129,32 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy") && alive)
         {
-            Debug.Log("Collided with Goomba");
-
-            StartCoroutine(DieAndResetSequence());
+            // Check if player is stomping an enemy
+            if (_marioBody.linearVelocity.y < -0.1f && transform.position.y > other.transform.position.y + (other.bounds.size.y * 0.3f))
+            {
+                Debug.Log("Stomped Goomba!");
+                _marioBody.AddForce(Vector2.up * (upSpeed * 0.5f), ForceMode2D.Impulse);
+                _gameManager.IncreaseScore(100);
+            }
+            else
+            {
+                Debug.Log("Collided with Goomba - Mario Dies");
+                StartCoroutine(DieAndResetSequence());
+            }
         }
     }
 
     private IEnumerator DieAndResetSequence()
     {
+        if (!alive) yield break;
+
+        alive = false;
         marioAnimator.Play("mario-die");
         marioAudio.PlayOneShot(marioDeath);
-        alive = false;
 
         yield return new WaitForSeconds(5.0f);
 
-        _gameManager.GameRestart();
+        _gameManager.LoseLife();
     }
 
     private void PlayJumpSound()
@@ -148,6 +164,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void PlayDeathImpulse()
     {
+        _marioBody.linearVelocity = Vector2.zero;
         _marioBody.AddForce(Vector2.up * deathImpulse, ForceMode2D.Impulse);
     }
 }
