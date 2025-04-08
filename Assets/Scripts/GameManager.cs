@@ -35,6 +35,18 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public AudioClip extraLifeSound;
 
+    /// <summary>
+    /// Event to signal HUD update for the time.
+    /// </summary>
+    public UnityEvent<int> timeChange;
+
+    /// <summary>
+    /// Time limit for the player to beat the level..
+    /// </summary>
+    private const float _LevelTimeLimit = 400f;
+
+    private float _timeRemaining;
+    private bool _isTimerRunning = false;
 
     private int _score = 0;
     private int _lives = 0;
@@ -62,6 +74,10 @@ public class GameManager : MonoBehaviour
 
         _nextLifeScoreThreshold = _ScoreForExtraLife;
 
+        _timeRemaining = _LevelTimeLimit;
+        _isTimerRunning = true;
+        SetTimeDisplay(_timeRemaining);
+
         gameStart.Invoke();
     }
 
@@ -71,6 +87,10 @@ public class GameManager : MonoBehaviour
     public void GameRestart()
     {
         gameRestart.Invoke();
+
+        _timeRemaining = _LevelTimeLimit;
+        _isTimerRunning = true;
+        SetTimeDisplay(_timeRemaining);
     }
 
     /// <summary>
@@ -78,11 +98,14 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameOver()
     {
+        _isTimerRunning = false;
         gameOver.Invoke();
     }
 
     public void IncreaseScore(int increment)
     {
+        if (!_isTimerRunning) return;
+
         _score += increment;
         SetScore(_score);
 
@@ -112,6 +135,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseLife()
     {
+        _isTimerRunning = false;
         _lives--;
         SetLives(_lives);
 
@@ -125,6 +149,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void LevelComplete()
+    {
+        _isTimerRunning = false;
+        Debug.Log($"LEVEL COMPLETE! Time Remaining: {_timeRemaining}");
+    }
+
+    private void TimeExpired()
+    {
+        if (!_isTimerRunning) return;
+
+        _isTimerRunning = false;
+        _timeRemaining = 0f;
+        SetTimeDisplay(_timeRemaining);
+        LoseLife();
+    }
+
+    /// <summary>
+    /// Helper to update the time display via event.
+    /// </summary>
+    /// <param name="time">The time to display.</param>
+    private void SetTimeDisplay(float time)
+    {
+        int displayTime = Mathf.CeilToInt(Mathf.Max(time, 0f));
+        timeChange.Invoke(displayTime);
+    }
+
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -133,5 +183,18 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         GameStart();
+    }
+
+    private void Update()
+    {
+        if (_isTimerRunning)
+        {
+            _timeRemaining -= Time.deltaTime;
+            SetTimeDisplay(_timeRemaining);
+
+            if (_timeRemaining <= 0f)
+                TimeExpired();
+
+        }
     }
 }
