@@ -41,6 +41,17 @@ public class GameManager : MonoBehaviour
     public UnityEvent<int> timeChange;
 
     /// <summary>
+    /// The AudioSource component dedicated to playing background music.
+    /// </summary>
+    [Tooltip("Assign the AudioSource component used for background music here.")]
+    public AudioSource backgroundMusicAudioSource;
+
+    /// <summary>
+    /// The background music track to play while the player is alive.
+    /// </summary>
+    public AudioClip backgroundMusicClip;
+
+    /// <summary>
     /// Time limit for the player to beat the level..
     /// </summary>
     private const float _LevelTimeLimit = 400f;
@@ -58,10 +69,13 @@ public class GameManager : MonoBehaviour
     private int _nextLifeScoreThreshold = 0;
 
     /// <summary>
-    /// To play the sound effect.
+    /// The AudioSource component dedicated to playing sound effects.
     /// </summary>
-    private AudioSource _audioSource;
+    private AudioSource _sfxAudioSource;
 
+    /// <summary>
+    /// Sets up and starts the initial game state.
+    /// </summary>
     public void GameStart()
     {
         Application.targetFrameRate = 30;
@@ -79,6 +93,8 @@ public class GameManager : MonoBehaviour
         SetTimeDisplay(_timeRemaining);
 
         gameStart.Invoke();
+
+        PlayBackgroundMusic();
     }
 
     /// <summary>
@@ -91,6 +107,8 @@ public class GameManager : MonoBehaviour
         _timeRemaining = _LevelTimeLimit;
         _isTimerRunning = true;
         SetTimeDisplay(_timeRemaining);
+
+        PlayBackgroundMusic();
     }
 
     /// <summary>
@@ -100,6 +118,7 @@ public class GameManager : MonoBehaviour
     {
         _isTimerRunning = false;
         gameOver.Invoke();
+        StopBackgroundMusic();
     }
 
     public void IncreaseScore(int increment)
@@ -126,13 +145,19 @@ public class GameManager : MonoBehaviour
         livesChange.Invoke(newLives);
     }
 
+    /// <summary>
+    /// Plays the extra life sound effect.
+    /// </summary>
     public void GainLife()
     {
         _lives++;
         SetLives(_lives);
-        _audioSource.PlayOneShot(extraLifeSound);
+        _sfxAudioSource.PlayOneShot(extraLifeSound);
     }
 
+    /// <summary>
+    /// Processes the player losing a life.
+    /// </summary>
     public void LoseLife()
     {
         _isTimerRunning = false;
@@ -143,10 +168,27 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
-        else
-        {
-            GameRestart();
-        }
+        GameRestart();
+    }
+
+    /// <summary>
+    /// Starts playing the background music if available and configured.
+    /// Ensures music is stopped first to prevent overlapping playback issues if called rapidly.
+    /// </summary>
+    public void PlayBackgroundMusic()
+    {
+        if (!backgroundMusicAudioSource.isPlaying)
+            backgroundMusicAudioSource.Play();
+    }
+
+    /// <summary>
+    /// Stops the background music if it's playing.
+    /// This should be called immediately when the player starts dying.
+    /// </summary>
+    public void StopBackgroundMusic()
+    {
+        if (backgroundMusicAudioSource.isPlaying)
+            backgroundMusicAudioSource.Stop();
     }
 
     public void LevelComplete()
@@ -175,9 +217,15 @@ public class GameManager : MonoBehaviour
         timeChange.Invoke(displayTime);
     }
 
+    /// <summary>
+    /// Called when the script instance is being loaded.
+    /// </summary>
     private void Awake()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _sfxAudioSource = GetComponent<AudioSource>();
+        backgroundMusicAudioSource.clip = backgroundMusicClip;
+        backgroundMusicAudioSource.loop = true;
+        backgroundMusicAudioSource.playOnAwake = false;
     }
 
     private void Start()

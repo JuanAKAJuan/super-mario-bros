@@ -139,15 +139,19 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 Debug.Log("Collided with Goomba - Mario Dies");
-                StartCoroutine(DieAndResetSequence());
+                StartCoroutine(DieAndRestartSequence());
             }
         }
     }
 
-    private IEnumerator DieAndResetSequence()
+    /// <summary>
+    /// Coroutine handling the player's death animation, sound, and triggering game state changes.
+    /// </summary>
+    private IEnumerator DieAndRestartSequence()
     {
         if (!alive) yield break;
 
+        _gameManager.StopBackgroundMusic();
         alive = false;
         marioAnimator.Play("mario-die");
         marioAudio.PlayOneShot(marioDeath);
