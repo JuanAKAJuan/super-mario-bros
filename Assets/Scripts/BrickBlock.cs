@@ -1,8 +1,21 @@
+using System.Collections;
 using UnityEngine;
 
 public class BrickBlock : MonoBehaviour
 {
     public AudioSource brickHitAudio;
+    public float initialBumpForce = 10.0f;
+    public float bumpResetDelay = 0.3f;
+
+    private Rigidbody2D _rigidBody;
+    private Vector3 _startPosition;
+
+    private void Awake()
+    {
+        _rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody.bodyType = RigidbodyType2D.Kinematic;
+        _startPosition = transform.position;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -30,5 +43,18 @@ public class BrickBlock : MonoBehaviour
     private void TriggerHit()
     {
         PlayBrickHitSound();
+        StartCoroutine(BumpSequence());
+    }
+
+    private IEnumerator BumpSequence()
+    {
+        _rigidBody.bodyType = RigidbodyType2D.Dynamic;
+        _rigidBody.AddForce(Vector2.up * initialBumpForce, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(bumpResetDelay);
+
+        _rigidBody.bodyType = RigidbodyType2D.Kinematic;
+        _rigidBody.linearVelocity = Vector2.zero;
+        _rigidBody.angularVelocity = 0f;
+        transform.position = _startPosition;
     }
 }

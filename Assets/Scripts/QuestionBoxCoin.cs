@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class QuestionBoxCoin : MonoBehaviour
 {
     /// <summary>
     /// Reference to the animator.

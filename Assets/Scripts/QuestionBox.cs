@@ -4,11 +4,14 @@ using UnityEngine;
 public class QuestionBox : MonoBehaviour
 {
     public AudioSource questionBoxHitAudio;
-    public Coin coin;
-    public float initialBumpForce = 2.0f;
+    public QuestionBoxCoin coin;
+    public float initialBumpForce = 10.0f;
     public float bumpResetDelay = 0.3f;
 
-    private const int ScoreValue = 200;
+    /// <summary>
+    /// The amount of score this coin gives when collected.
+    /// </summary>
+    private const int _ScoreValue = 200;
     /// <summary>
     /// Reference to the animator.
     /// </summary>
@@ -27,11 +30,12 @@ public class QuestionBox : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _rigidBody = GetComponent<Rigidbody2D>();
         _gameManager = GameObject.FindGameObjectWithTag("Manager")?.GetComponent<GameManager>();
 
-        _startPosition = transform.position;
+        _rigidBody = GetComponent<Rigidbody2D>();
         _rigidBody.bodyType = RigidbodyType2D.Kinematic;
+        _startPosition = transform.position;
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,11 +69,11 @@ public class QuestionBox : MonoBehaviour
     private void TriggerHit()
     {
         _boxHasBeenHit = true;
-        StartCoroutine(BumpSequence());
         _animator.SetTrigger(HitTriggerHash);
         coin.TriggerHit();
         PlayQuestionBoxHitSound();
-        _gameManager.IncreaseScore(ScoreValue);
+        _gameManager.IncreaseScore(_ScoreValue);
+        StartCoroutine(BumpSequence());
     }
 
     private IEnumerator BumpSequence()

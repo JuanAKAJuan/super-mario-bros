@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 978452859871581018}
   - component: {fileID: 2468536778682921876}
   m_Layer: 0
-  m_Name: Coin
+  m_Name: Question Box Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

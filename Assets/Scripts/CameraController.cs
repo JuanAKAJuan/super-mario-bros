@@ -8,42 +8,54 @@ public class CameraController : MonoBehaviour
     public Transform player;
 
     /// <summary>
-    /// GameObject that indicates the end of the map.
+    /// GameObject indicating the right end of the scrollable map.
     /// </summary>
     public Transform endLimit;
 
     /// <summary>
-    /// Initial x-offset between the camera and Mario.
+    /// Desired horizontal offset of the camera from the player.
+    /// 0 means the player is centered horizontally.
+    /// Positive values shift the camera right (player appears left).
+    /// Negative values shift the camera left (player appears right).
     /// </summary>
-    private float offset;
+    public float desiredOffsetX = 0f;
 
     /// <summary>
     /// Smallest x-coordinate of the camera.
     /// </summary>
-    private float startX;
+    private float _minCameraX;
 
     /// <summary>
     /// Largest x-coordinate of the camera.
     /// </summary>
-    private float endX;
+    private float _maxCameraX;
 
-    private float viewportHalfWidth;
+    /// <summary>
+    /// Cached half-width of the camera's viewport in world units.
+    /// </summary>
+    private float _viewportHalfWidth;
 
     private void Start()
     {
         // Get the coordinate of the bottom left of the viewport.
         // z doesn't matter since the camera is orthographic.
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, 0));
-        viewportHalfWidth = Mathf.Abs(bottomLeft.x - this.transform.position.x);
-        offset = this.transform.position.x - player.position.x;
-        startX = this.transform.position.x;
-        endX = endLimit.transform.position.x - viewportHalfWidth;
+        _viewportHalfWidth = Mathf.Abs(bottomLeft.x - this.transform.position.x);
+
+        // -- Calculate boundaries --
+        _minCameraX = this.transform.position.x;
+        _maxCameraX = endLimit.position.x - _viewportHalfWidth;
+
+        float initialDesiredX = player.position.x + desiredOffsetX;
+        float clampedInitialX = Mathf.Clamp(initialDesiredX, _minCameraX, _maxCameraX);
+        this.transform.position = new Vector3(clampedInitialX, this.transform.position.y, this.transform.position.z);
     }
 
-    private void Update()
+    // Using LateUpdate to run after all Update and physics calculations are done for the frame.
+    private void LateUpdate()
     {
-        float desiredX = player.position.x + offset;
-        if (desiredX > startX && desiredX < endX)
-            this.transform.position = new Vector3(desiredX, this.transform.position.y, this.transform.position.z);
+        float desiredX = player.position.x + desiredOffsetX;
+        float clampedX = Mathf.Clamp(desiredX, _minCameraX, _maxCameraX);
+        this.transform.position = new Vector3(clampedX, this.transform.position.y, this.transform.position.z);
     }
 }

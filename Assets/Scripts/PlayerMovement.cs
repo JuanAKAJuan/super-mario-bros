@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float upSpeed = 30;
     public Animator marioAnimator;
     public AudioSource marioAudio;
+    public AudioSource effectsAudioSource;
     public AudioClip marioDeath;
     public float deathImpulse = 15;
     public Transform gameCamera;
@@ -25,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     public void GameRestart()
     {
         // Reset position
-        _marioBody.transform.position = new Vector3(-0.023f, -1.07f, 0f);
+        _marioBody.transform.position = new Vector3(-6.52f, -2.47f, 0f);
 
         // Reset sprite direction
         _faceRightState = true;
@@ -37,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Reset camera position
         gameCamera.position = new Vector3(0, 0, -10);
+    }
+
+    public void PlaySoundEffect(AudioClip clip, float volume = 1.0f)
+    {
+        effectsAudioSource.PlayOneShot(clip, volume);
     }
 
     private void Awake()

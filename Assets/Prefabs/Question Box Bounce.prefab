@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 6116542299397222123}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.78, y: 4.19, z: 0}
+  m_LocalPosition: {x: -23.761, y: 4.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -208,7 +208,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6116542299397222123}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
@@ -243,7 +243,7 @@ SpringJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -23.780003, y: 4.19}
+  m_ConnectedAnchor: {x: -23.760998, y: 4.19}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionBoxHitAudio: {fileID: 3098892333358329109}
-  coin: {fileID: 2222113652179695703}
+  coin: {fileID: 9079512917392400668}
   initialBumpForce: 10
   bumpResetDelay: 0.3
 --- !u!95 &5815845920522510539
@@ -393,7 +393,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 188214724043460968, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
       propertyPath: m_Name
-      value: Coin
+      value: Question Box Coin
       objectReference: {fileID: 0}
     - target: {fileID: 3498502537829662737, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -435,22 +435,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2468536778682921876, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 188214724043460968, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9079512917392400668}
   m_SourcePrefab: {fileID: 100100000, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
 --- !u!4 &871908379922353106 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3498502537829662737, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
   m_PrefabInstance: {fileID: 4365265160212220867}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2222113652179695703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2468536778682921876, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
+--- !u!1 &4469864152311880363 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 188214724043460968, guid: 3eea42dbebcbfc1e4803e3b8be5ccab7, type: 3}
   m_PrefabInstance: {fileID: 4365265160212220867}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &9079512917392400668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469864152311880363}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ca79776ba4f9cb4a8c17108c7e1e505, type: 3}

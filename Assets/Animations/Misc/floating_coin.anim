@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: coin_dormant
+  m_Name: floating_coin
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,15 +21,21 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1571818775, guid: b9b77551316700c5a9746bb7230456db, type: 3}
-    - time: 0.41666666
-      value: {fileID: 1571818775, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+      value: {fileID: -2735487014922336499, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - time: 0.033333335
+      value: {fileID: 945051112172071285, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - time: 0.2
+      value: {fileID: -8212910277675627911, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - time: 0.46666667
+      value: {fileID: -2735487014922336499, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - time: 0.6333333
+      value: {fileID: -2735487014922336499, guid: b9b77551316700c5a9746bb7230456db, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 60
+  m_SampleRate: 30
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -46,14 +52,17 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1571818775, guid: b9b77551316700c5a9746bb7230456db, type: 3}
-    - {fileID: 1571818775, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - {fileID: -2735487014922336499, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - {fileID: 945051112172071285, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - {fileID: -8212910277675627911, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - {fileID: -2735487014922336499, guid: b9b77551316700c5a9746bb7230456db, type: 3}
+    - {fileID: -2735487014922336499, guid: b9b77551316700c5a9746bb7230456db, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
