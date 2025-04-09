@@ -243,7 +243,7 @@ SpringJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -23.760998, y: 4.19}
+  m_ConnectedAnchor: {x: -23.761, y: 4.19}
   m_AutoConfigureDistance: 1
   m_Distance: 0.005
   m_DampingRatio: 1

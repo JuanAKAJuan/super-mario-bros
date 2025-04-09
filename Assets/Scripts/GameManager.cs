@@ -102,11 +102,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void GameRestart()
     {
-        gameRestart.Invoke();
+        _score = 0;
+        SetScore(_score);
+        _nextLifeScoreThreshold = _ScoreForExtraLife;
 
         _timeRemaining = _LevelTimeLimit;
         _isTimerRunning = true;
         SetTimeDisplay(_timeRemaining);
+
+        gameRestart.Invoke();
 
         PlayBackgroundMusic();
     }

@@ -7,9 +7,9 @@ public class HUDManager : MonoBehaviour
     public GameObject livesText;
     public GameObject timeText;
 
-    private Vector3 _scoreTextPosition = new Vector3(-188, 529, 0);
-    private Vector3 _livesTextPosition = new Vector3(1378, 529, 0);
-    private Vector3 _timeTextPosition = new Vector3(549, 529, 0);
+    private Vector3 _scoreTextPosition = new(-188, 529, 0);
+    private Vector3 _livesTextPosition = new(1378, 529, 0);
+    private Vector3 _timeTextPosition = new(549, 529, 0);
 
     public void GameStart()
     {

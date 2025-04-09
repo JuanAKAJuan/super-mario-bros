@@ -6283,13 +6283,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: smb1_misc_sprites_206
+      name: end_castle
       rect:
         serializedVersion: 2
-        x: 548
-        y: 565
-        width: 114
-        height: 178
+        x: 549
+        y: 663
+        width: 80
+        height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -13827,6 +13827,7 @@ TextureImporter:
       coin_3: 974196589084800118
       coin_4: -2771610037876743989
       empty_box: 2102946939851786183
+      end_castle: -8472809966437725049
       floating_coin_1: -2735487014922336499
       floating_coin_2: 945051112172071285
       floating_coin_3: -8212910277675627911
@@ -13955,7 +13956,6 @@ TextureImporter:
       smb1_misc_sprites_203: -6089827792500977226
       smb1_misc_sprites_204: 5583645246926840309
       smb1_misc_sprites_205: 2496675728697685550
-      smb1_misc_sprites_206: -8472809966437725049
       smb1_misc_sprites_207: -8844972556297886177
       smb1_misc_sprites_208: 7505647203071332935
       smb1_misc_sprites_209: -5326572495454420734
